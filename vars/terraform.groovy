@@ -34,7 +34,7 @@ def exec(command, silent=false) {
     download()
   }
   withEnv(["TF_INPUT=0", "TF_IN_AUTOMATION=1", "TF_CLI_ARGS=-no-color"]) {
-    def status = sh script: '#!/bin/sh -e\n' + "./terraform ${command}", returnStatus: true, returnStdout: !silent
+    def status = sh script: '#!/bin/sh -ex\n' + "./terraform ${command}", returnStatus: true, returnStdout: !silent
     return status
   }
 }
