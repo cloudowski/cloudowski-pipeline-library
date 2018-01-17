@@ -13,7 +13,7 @@ def download(version='0.11.2'){
 }
 
 def init() {
-  exec('init')
+  exec('init -upgrade')
   exec('get -update=true')
 }
 
