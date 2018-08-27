@@ -5,5 +5,4 @@ def call(ws, Closure body) {
         body()
 }
 
-
 return this;
