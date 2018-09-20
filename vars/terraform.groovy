@@ -18,7 +18,7 @@ def init() {
 }
 
 def workspace_exists(ws) {
-  def status = exec("workspace select ${ws}", true)
+  def status = sh script: "./terraform workspace select ${ws} &> /dev/null", returnStatus: true
   return !status
 }
 
@@ -29,13 +29,20 @@ def set_workspace(ws) {
   exec("workspace select ${ws}")
 }
 
-def exec(command, silent=false) {
+def exec(command, color = false) {
+  def tf_envs = [ "TF_INPUT=0", "TF_IN_AUTOMATION=1"]
+  if (color) {
+    tf_envs << "TF_CLI_ARGS='-no-color'"
+  }
+
   if (!fileExists('terraform')) {
     download()
   }
-  withEnv(["TF_INPUT=0", "TF_IN_AUTOMATION=1", "TF_CLI_ARGS=-no-color"]) {
-    def status = sh script: '#!/bin/sh -ex\n' + "./terraform ${command}", returnStatus: true, returnStdout: !silent
-    return status
+
+  withEnv(tf_envs) {
+    //def status = sh script: '#!/bin/sh -ex\n' + "./terraform ${command}", returnStatus: true, returnStdout: !silent
+    //return status
+    sh "./terraform ${command}"
   }
 }
 
