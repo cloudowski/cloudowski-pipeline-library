@@ -2,6 +2,15 @@
 Pipeline library for use with Jenkins pipelines. Contains various vars and groovy classes.
 
 
+## Terraform steps
+
+There are a couple of terraform steps defined in this library:
+
+* **terraform.download** - downloads terraform into a workspace (version may be defined as parameter)
+* **terraform.init** - intialize terraform state
+* **terraform.exec** - executes terraform with options set for automated workflows (cause that's where you will use it - no inputs allowed), downloads it first if it's necessary
+* **terraform.set_workspace** - set a workspace and creates it if it doesn't exists
+
 ## Building containers and publishing Helm Charts
 
 Here is an example of **Jenkinsfile** that will
