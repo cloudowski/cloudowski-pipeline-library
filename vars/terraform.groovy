@@ -1,6 +1,6 @@
 #!/usr/bin/env groovy
 
-def download(version='0.11.8'){
+def download(version='0.11.11'){
   if (!fileExists('terraform')) {
     sh """
       curl -LsSo terraform.zip https://releases.hashicorp.com/terraform/${version}/terraform_${version}_linux_amd64.zip \
